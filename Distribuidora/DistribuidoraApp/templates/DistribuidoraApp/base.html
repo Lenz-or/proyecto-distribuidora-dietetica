@@ -101,8 +101,14 @@
                             <a href="contact.html" class="nav-item nav-link">Contacto</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
+                            {% if user.is_authenticated %}
+                            <p class="text-dark my-3 mx-2"> Hola, <b>{{user.username}}</b>!</p>
+                            <a href="{% url 'logout' %}" class="nav-item nav-link">Cerrar sesión</a>
+                            {% else %}
                             <a href="{% url 'login' %}" class="nav-item nav-link">Ingresar</a>
                             <a href="{% url 'register' %}" class="nav-item nav-link">Registrarse</a>
+
+                            {% endif%}
                         </div>
                     </div>
                 </nav>

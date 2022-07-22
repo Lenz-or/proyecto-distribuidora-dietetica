@@ -65,3 +65,7 @@ def register_request(request):
     form = UserRegisterForm()
 
     return render(request,"DistribuidoraApp/register.html",{"form":form})
+
+def logout_request(request):
+    logout(request)
+    return redirect("inicio")
