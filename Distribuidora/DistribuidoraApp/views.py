@@ -193,3 +193,10 @@ def editarProducto(request, id):
             return redirect(to="/listarproductos")
         data["form"] = formulario
     return render(request, 'DistribuidoraApp/modificar-productos.html', data)
+
+@login_required(login_url='/login')
+def deleteProducto(request, id):
+    producto = get_object_or_404(Productos, id=id)
+    producto.delete()
+    messages.success(request, "Registro eliminado correctamente")
+    return redirect("listarproductos")
