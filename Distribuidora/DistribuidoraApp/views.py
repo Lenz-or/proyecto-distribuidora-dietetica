@@ -1,8 +1,11 @@
 from django.shortcuts import redirect,render
 from .forms import *
 from django.contrib.auth import login, logout, authenticate
-
+from django.core.paginator import Paginator
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import Http404
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -69,3 +72,40 @@ def register_request(request):
 def logout_request(request):
     logout(request)
     return redirect("inicio")
+
+
+# Views categorias
+@login_required(login_url='/login')
+def listCategorias(request):
+    lista_categorias = Categorias.objects.all().order_by('nombre')
+    page = request.GET.get('page', 1)
+
+    try:
+        paginator = Paginator(lista_categorias, 6)
+        lista_categorias = paginator.page(page)
+    except:
+        raise Http404
+
+    data = {'entity': lista_categorias,
+            'title': 'LISTADO DE CATEGORIAS',
+            'paginator': paginator
+            }
+
+    return render(request,'DistribuidoraApp/categorias.html', data)
+
+
+@login_required(login_url='/login')
+def addCategoria(request):
+    data = {
+        'form': CategoriaForm()
+    }
+    if request.method == 'POST':
+        formulario = CategoriaForm(data=request.POST)
+
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Registro agregado correctamente")
+            return redirect(to="/categorias")
+        else:
+            data["form"] = formulario
+    return render(request, 'DistribuidoraApp/agregar.html', data)

@@ -38,10 +38,14 @@
             </div>
             
             <div class="col-lg-9 col-6 text-right">
+                {% if user.is_authenticated %}
+
                 <a href="" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
+
+                {% endif %}
             </div>
         </div>
     </div>
@@ -89,8 +93,13 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
                             <a href="{% url 'inicio' %}" class="nav-item nav-link">Inicio</a>
-                            <a href="shop.html" class="nav-item nav-link ">Tienda</a>
-                            <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
+                            {% if user.is_staff %}
+
+                            <a href="{% url 'inicio' %}" class="nav-item nav-link ">Listado productos</a>
+                            <a href="{% url 'categorias' %}" class="nav-item nav-link">Listado categorias</a>
+                            
+                            {% endif %}
+                            <!-- 
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                                 <div class="dropdown-menu rounded-0 m-0">
@@ -98,6 +107,7 @@
                                     <a href="checkout.html" class="dropdown-item">Checkout</a>
                                 </div>
                             </div>
+                            -->
                             <a href="contact.html" class="nav-item nav-link">Contacto</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">

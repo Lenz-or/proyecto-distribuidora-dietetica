@@ -1,0 +1,53 @@
+{% extends 'DistribuidoraApp/base.html' %}
+{% load static %}
+
+{% block contenidoPagina %}
+<div class="min-vh-100 d-flex flex-colum py-4">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-6 col-sm-4 animate__animated animate__backInRight animate__delay-0.4s">
+                <div class="card">
+                    <div class="card-header text-center font-weight-bold">
+                        {{ title }}
+                    </div>
+                    <div class="card-body  table-responsive">
+                        <div class="d-flex justify-content-end mb-2 mx-2">
+                            <a href="{% url 'addcategoria' %}" class="btn btn-dark btn-sm pull-right" type="submit">
+                            Nueva Categoria
+                            </a>
+                        </div>
+                        <table class="table table-condensed">
+                            <thead class="thead-dark">
+                                <tr class="text-center">
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th colspan="2">Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if entity %} {% for categoria in entity %}
+                                <tr>
+                                    <td>{{ categoria.id }}</td>
+                                    <td>{{ categoria.nombre }}</td>
+                                    <td colspan="2" class="text-center">
+                                        <a class="btn btn-secondary btn-sm" href="{% url 'tienda:editcategoria' categoria.id %}" type="button"><i class="bi bi-pencil-square"></i></a>
+                                        <a class="btn btn-danger btn-sm" href="{% url 'tienda:deleteCategoria' categoria.id %}" type="button"><i class="bi bi-trash-fill"></i></a>
+                                    </td>
+                                </tr>
+                                {% endfor %} {% else %}
+                                <div class="text-center text-warning">
+                                    <h3> No se encontraron Productos!!</h3>
+                                </div>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        <div>
+                            {% include 'DistribuidoraApp/paginator.html' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
