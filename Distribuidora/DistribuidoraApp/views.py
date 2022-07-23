@@ -127,3 +127,10 @@ def modificarCategoria(request, id):
             data["form"] = formulario
 
     return render(request, 'DistribuidoraApp/modificar-categoria.html', data)
+
+@login_required(login_url='/login')
+def deleteCategoria(request, id):
+    categoria = get_object_or_404(Categorias, id=id)
+    categoria.delete()
+    messages.success(request, "Registro eliminado correctamente")
+    return redirect("categorias")
