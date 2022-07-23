@@ -1,4 +1,4 @@
-from django.shortcuts import redirect,render
+from django.shortcuts import get_object_or_404, redirect,render
 from .forms import *
 from django.contrib.auth import login, logout, authenticate
 from django.core.paginator import Paginator
@@ -109,3 +109,21 @@ def addCategoria(request):
         else:
             data["form"] = formulario
     return render(request, 'DistribuidoraApp/agregar.html', data)
+
+@login_required(login_url='/login')
+def modificarCategoria(request, id):
+    categoria = get_object_or_404(Categorias, id=id)
+
+    data = {
+        'form': CategoriaForm(instance=categoria)
+    }
+    if request.method == 'POST':
+        formulario = CategoriaForm(data=request.POST, instance=categoria)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Registro modificado correctamente")
+            return redirect("categorias")
+        else:
+            data["form"] = formulario
+
+    return render(request, 'DistribuidoraApp/modificar-categoria.html', data)
