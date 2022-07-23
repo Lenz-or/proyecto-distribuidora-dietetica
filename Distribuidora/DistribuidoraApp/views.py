@@ -14,7 +14,26 @@ from django.db.models import Q
 
 def inicio(request):
 
-        return render(request,"DistribuidoraApp/index.html",{})
+    busqueda = request.POST.get("buscador")
+    product_list = Productos.objects.order_by('nombre')
+    page = request.GET.get('page', 1)
+
+    if busqueda:
+        product_list = Productos.objects.filter(
+            Q(nombre__icontains = busqueda) |
+            Q(descripcion__icontains = busqueda)
+        ).distinct()
+    
+    try:
+        paginator = Paginator(product_list, 12)
+        product_list = paginator.page(page)
+    except:
+        raise Http404
+
+    data = {'entity': product_list,
+            'paginator': paginator
+    }
+    return render(request, 'DistribuidoraApp/index.html', data)
 
 
 def login_request(request):
