@@ -219,3 +219,12 @@ def deleteProducto(request, id):
     producto.delete()
     messages.success(request, "Registro eliminado correctamente")
     return redirect("listarproductos")
+
+def detalleProducto(request, id):
+    product = get_object_or_404(Productos, id=id)
+    otrosProductos = Productos.objects.filter(categoria=product.categoria)
+    data = {
+        'producto': product,
+        'productosRelacionados': otrosProductos
+    }
+    return render(request, 'DistribuidoraApp/detalle-productos.html', data)

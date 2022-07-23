@@ -17,7 +17,9 @@ Inicio
                     <input type="text" class="form-control bg-light border-1 small text-center" name="buscador" placeholder="buscar..." value="{{ request.POST.buscador }}">
                     <div class="input-group-append">
                         <button class="btn btn-danger mx-1" type="submit"> 
-                    <i class="bi bi-search bi-sm"></i>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                              </svg>
                 </button>
                     </div>
                 </div>
@@ -41,14 +43,15 @@ Inicio
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{ producto.nombre }}</h5>
                                     <!-- Product price-->
-                                    Gs. {{ producto.precio | intcomma }}
+                                    $. {{ producto.precio | intcomma }}
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-2 pt-2 border-top-0 bg-transparent">
                                 <div class="text-center">
-                                    <a class="btn btn-dark mt-auto" href="">Ver detalle</a> {% if user.is_authenticated%}
-                                    <a href="" class="btn btn-danger mt-2" type="button">
+                                    <a class="btn btn-dark mt-auto" href="{% url 'detalleProducto' producto.id %}">Ver detalle</a> 
+                                    {% if user.is_authenticated%}
+                                    <a href="" class="btn bg-primary text-white mt-2" type="button">
                                         <i class="bi-cart-fill me-1"></i> Agregar al Carrito
                                     </a>
                                     {% endif %}
