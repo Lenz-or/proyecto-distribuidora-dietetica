@@ -22,3 +22,9 @@ class CategoriaForm(forms.ModelForm):
     class Meta:
         model = Categorias
         fields = ["nombre"]
+
+class ProductoForm(forms.ModelForm):
+
+    class Meta:
+        model = Productos
+        fields = ["nombre", "descripcion", "precio", "stock", "categoria", "oferta", "imagen"]

@@ -160,3 +160,20 @@ def listarProductos(request):
             'paginator': paginator
             }
     return render(request, 'DistribuidoraApp/listar-productos.html', data)
+
+@login_required(login_url='/login')
+def addProducto(request):
+    data = {
+        'form' : ProductoForm()
+    }
+
+    if request.method == 'POST':
+        formulario = ProductoForm(data=request.POST, files=request.FILES)
+
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "Registro agregado correctamente")
+            return redirect(to="/listarproductos")
+        else:
+            data["form"] = formulario   
+    return render(request, 'DistribuidoraApp/agregar-productos.html', data)
