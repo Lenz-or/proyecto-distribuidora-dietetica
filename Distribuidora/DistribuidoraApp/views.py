@@ -93,6 +93,32 @@ def logout_request(request):
     logout(request)
     return redirect("inicio")
 
+@login_required(login_url='/login')
+def editar_perfil(request):
+
+    user = request.user # usuario con el que estamos loggueados
+
+    if request.method == "POST":
+        
+        form = UserEditForm(request.POST) # cargamos datos llenados
+
+        if form.is_valid():
+
+            info = form.cleaned_data
+            user.email = info["email"]
+            user.first_name = info["first_name"]
+            user.last_name = info["last_name"]
+            # user.password = info["password1"]
+
+            user.save()
+
+            return redirect("inicio")
+
+
+    else:
+        form = UserEditForm(initial={"email":user.email, "first_name":user.first_name, "last_name":user.last_name})
+
+    return render(request,"DistribuidoraApp/editar-perfil.html",{"form":form})
 
 # Views categorias
 @login_required(login_url='/login')
