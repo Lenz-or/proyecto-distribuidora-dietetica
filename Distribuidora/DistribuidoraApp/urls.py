@@ -11,7 +11,8 @@ urlpatterns = [
     path('deleteCategoria/<id>/', deleteCategoria, name='deleteCategoria'),
 
     path('listarproductos/', listarProductos, name='listarproductos'),
-        path('addproducto/', addProducto, name='addproducto'),
+    path('addproducto/', addProducto, name='addproducto'),
+    path('editproducto/<id>/', editarProducto, name='editproducto'),
 
 
     path('login/', login_request, name="login"),
