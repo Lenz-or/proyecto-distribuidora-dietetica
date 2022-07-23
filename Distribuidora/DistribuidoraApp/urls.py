@@ -10,6 +10,8 @@ urlpatterns = [
     path('editcategoria/<id>/', modificarCategoria, name='editcategoria'),
     path('deleteCategoria/<id>/', deleteCategoria, name='deleteCategoria'),
 
+    path('listarproductos/', listarProductos, name='listarproductos'),
+
     path('login/', login_request, name="login"),
     path('register', register_request, name="register"),
     path('logout', logout_request, name="logout"),

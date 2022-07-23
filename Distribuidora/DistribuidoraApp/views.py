@@ -6,6 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
 
 
 # Create your views here.
@@ -134,3 +135,28 @@ def deleteCategoria(request, id):
     categoria.delete()
     messages.success(request, "Registro eliminado correctamente")
     return redirect("categorias")
+
+
+
+@login_required(login_url='/login')
+def listarProductos(request):
+    busqueda = request.POST.get("buscador")
+    lista_productos = Productos.objects.order_by('nombre')
+    page = request.GET.get('page', 1)
+    if busqueda:
+        lista_productos = Productos.objects.filter(
+            Q(nombre__icontains = busqueda) |
+            Q(descripcion__icontains = busqueda)
+        ).distinct()
+
+    try:
+        paginator = Paginator(lista_productos, 6)
+        lista_productos = paginator.page(page)
+    except:
+        raise Http404
+
+    data = {'entity': lista_productos,
+            'title': 'LISTADO DE PRODUCTOS',
+            'paginator': paginator
+            }
+    return render(request, 'DistribuidoraApp/listar-productos.html', data)
