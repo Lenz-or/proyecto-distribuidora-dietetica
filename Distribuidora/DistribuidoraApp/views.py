@@ -105,7 +105,7 @@ def addCategoria(request):
         if formulario.is_valid():
             formulario.save()
             messages.success(request, "Registro agregado correctamente")
-            return redirect(to="/categorias")
+            return redirect("categorias")
         else:
             data["form"] = formulario
     return render(request, 'DistribuidoraApp/agregar.html', data)
