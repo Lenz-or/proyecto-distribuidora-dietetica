@@ -25,6 +25,7 @@ urlpatterns = [
     path('viewcart/', viewcart, name="viewcart"),
     path('addcart/<producto_id>/', agregar_producto, name="addcart"),
     path('restarcart/<producto_id>/', restar_producto, name="restarcart"),
+    path('delcart/<producto_id>/', eliminar_producto, name="delcart"),
 
 
 ]
