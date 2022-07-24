@@ -268,3 +268,16 @@ def agregar_producto(request, producto_id):
     producto=Productos.objects.get(id=producto_id)
     carro.agregar(producto=producto)
     return redirect("viewcart")
+
+def restar_producto(request, producto_id):
+    carro = Carro(request)
+    producto = Productos.objects.get(id=producto_id)
+    carro.restar(producto=producto)
+    return redirect("viewcart")
+
+
+def eliminar_producto(request, producto_id):
+    carro=Carro(request)
+    producto=Productos.objects.get(id=producto_id)
+    carro.eliminar(producto=producto)
+    return redirect("viewcart")
