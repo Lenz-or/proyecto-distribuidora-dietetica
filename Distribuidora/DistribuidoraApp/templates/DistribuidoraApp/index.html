@@ -34,7 +34,7 @@ Inicio
                         <div class="card h-100 text-center py-3">
                             <!-- Product image-->
                             {% if producto.imagen %}
-                            <img class="mx-auto d-block img-fluid" src="{{ producto.imagen.url }}" alt="producto" width="60px%" /> {% else %}
+                            <img class="mx-auto d-block img-fluid" src="{{ producto.imagen.url }}" alt="producto" width="450px" /> {% else %}
                             <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="sinImagen" /> {% endif %}
                             <!-- Product details-->
                             {% load humanize %}
@@ -43,7 +43,7 @@ Inicio
                                     <!-- Product name-->
                                     <h5 class="fw-bolder">{{ producto.nombre }}</h5>
                                     <!-- Product price-->
-                                    $. {{ producto.precio | intcomma }}
+                                    $ {{ producto.precio | intcomma }}
                                 </div>
                             </div>
                             <!-- Product actions-->

@@ -122,6 +122,19 @@ def editar_perfil(request):
 
     return render(request,"DistribuidoraApp/editar-perfil.html",{"form":form})
 
+def productoxCategoria(request, id):
+    busqueda = request.POST.get("buscador")
+    lista_productos = Productos.objects.filter(categoria = id)
+    
+    if busqueda:
+        lista_productos = Productos.objects.filter(
+            Q(nombre__icontains=busqueda) |
+            Q(descripcion__icontains=busqueda)
+        ).distinct()
+
+    data = {'entity': lista_productos}
+    return render(request, 'DistribuidoraApp/index.html', data)
+
 # Views categorias
 @login_required(login_url='/login')
 def listCategorias(request):
@@ -280,4 +293,9 @@ def eliminar_producto(request, producto_id):
     carro=Carro(request)
     producto=Productos.objects.get(id=producto_id)
     carro.eliminar(producto=producto)
+    return redirect("viewcart")
+
+def limpiar_carrito(request):
+    carro=Carro(request)
+    carro.limpiar_carro()
     return redirect("viewcart")
