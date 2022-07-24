@@ -1,4 +1,4 @@
-{% extends 'base.html' %} 
+{% extends 'DistribuidoraApp/base.html' %}
 {% load static %}
 
 {% block contenidoPagina %}
@@ -30,8 +30,8 @@
                                 </tr>
                             </thead>
                             <tbody class="py-4">
-                                {% if request.session.carro.items %} 
-                                {% for key, value in request.session.carro.items %}
+                                {% if carro.items %} 
+                                {% for key, value in carro.items %}
                                 <tr>
                                     <td>{{ value.nombre }}</td>
 

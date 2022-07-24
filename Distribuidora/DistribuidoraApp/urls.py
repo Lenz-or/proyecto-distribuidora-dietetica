@@ -22,4 +22,7 @@ urlpatterns = [
     path('editar_perfil', editar_perfil, name="editar_perfil"),
     path('logout', logout_request, name="logout"),
 
+    path('viewcart/', viewcart, name="viewcart"),
+    path('addcart/<producto_id>/', agregar_producto, name="addcart"),
+
 ]

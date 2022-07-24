@@ -7,6 +7,8 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Q
+from .carro import Carro
+from .models import *
 
 
 # Create your views here.
@@ -254,3 +256,13 @@ def detalleProducto(request, id):
         'productosRelacionados': otrosProductos
     }
     return render(request, 'DistribuidoraApp/detalle-productos.html', data)
+
+
+def viewcart(request):
+    return render(request, 'DistribuidoraApp/carrito.html', {"carro": request.session["carro"]})
+
+def agregar_producto(request, producto_id):
+    carro=Carro(request)
+    producto=Productos.objects.get(id=producto_id)
+    carro.agregar(producto=producto)
+    return redirect("viewcart")
