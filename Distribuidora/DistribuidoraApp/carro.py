@@ -14,7 +14,6 @@ class Carro:
                 "nombre" : producto.nombre,
                 "precio" : producto.precio,
                 "cantidad" : 1,
-                "imagen" : producto.imagen.url
             }
         else:
            for key, value in self.carro.items():

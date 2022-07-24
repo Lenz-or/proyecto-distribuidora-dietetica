@@ -259,7 +259,9 @@ def detalleProducto(request, id):
 
 
 def viewcart(request):
-    return render(request, 'DistribuidoraApp/carrito.html', {"carro": request.session["carro"]})
+    carrito = request.session.get('carro')
+    data = {'carro': carrito}
+    return render(request, 'DistribuidoraApp/carrito.html', data)
 
 def agregar_producto(request, producto_id):
     carro=Carro(request)
