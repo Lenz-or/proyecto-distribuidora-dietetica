@@ -37,6 +37,10 @@ def inicio(request):
     }
     return render(request, 'DistribuidoraApp/index.html', data)
 
+def nosotros(request):
+     return render(request, 'DistribuidoraApp/nosotros.html', {})
+
+
 
 def login_request(request):
 
