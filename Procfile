@@ -1,0 +1,1 @@
+web: gunicorn --pythonpath Distribuidora Distribuidora.wsgi
