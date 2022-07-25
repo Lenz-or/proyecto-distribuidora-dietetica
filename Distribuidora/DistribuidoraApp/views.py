@@ -14,6 +14,9 @@ from .models import *
 # Create your views here.
 
 
+def entrada(request):
+    return redirect("inicio")
+
 def inicio(request):
 
     busqueda = request.POST.get("buscador")
@@ -237,7 +240,7 @@ def addProducto(request):
         if formulario.is_valid():
             formulario.save()
             messages.success(request, "Registro agregado correctamente")
-            return redirect(to="/listarproductos")
+            return redirect("listarproductos")
         else:
             data["form"] = formulario   
     return render(request, 'DistribuidoraApp/agregar-productos.html', data)
@@ -254,7 +257,7 @@ def editarProducto(request, id):
         if formulario.is_valid():
             formulario.save()
             messages.success(request, "Registro modificado correctamente")
-            return redirect(to="/listarproductos")
+            return redirect("listarproductos")
         data["form"] = formulario
     return render(request, 'DistribuidoraApp/modificar-productos.html', data)
 

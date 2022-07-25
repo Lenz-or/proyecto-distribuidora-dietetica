@@ -21,5 +21,6 @@ from DistribuidoraApp.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('distribuidora/', include('DistribuidoraApp.urls')),
+    path('', entrada),
+    path('distribuidorapp/', include('DistribuidoraApp.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
