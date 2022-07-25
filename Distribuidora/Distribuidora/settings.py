@@ -17,6 +17,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+db_from_env = dj_database_url.config(conn_max_age=500)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-6*1gz%x&+!%_a#l$4p4*l&&0@ba(6kjdzer_jn^iggw&wfm1n4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -83,7 +84,6 @@ WSGI_APPLICATION = 'Distribuidora.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-db_from_env = dj_database_url.config(conn_max_age=500)
 
 DATABASES = {
     'default': {
