@@ -4,7 +4,7 @@ from .views import *
 
 urlpatterns = [
     # URLS de la App
-    
+    path('', inicio, name="inicio"),
     path('nosotros/', nosotros, name='nosotros'),
     path('categorias/', listCategorias, name='categorias'),
     path('addcategoria/', addCategoria, name='addcategoria'),
