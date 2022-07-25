@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-6*1gz%x&+!%_a#l$4p4*l&&0@ba(6kjdzer_jn^iggw&wfm1n4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*",]
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'DistribuidoraApp',
     'django.contrib.humanize',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
