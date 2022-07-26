@@ -1,6 +1,10 @@
 {% extends 'DistribuidoraApp/base.html' %}
 {% load static %}
 
+{% block tituloPagina %}
+Modificar productos
+{% endblock %}
+
 {% block contenidoPagina %}
 
 <div class="container-fluid">
@@ -13,7 +17,7 @@
                         {% csrf_token %} 
                         {{ form.as_p }}
                         <div class="d-flex justify-content-end">
-                            <a href="/listarproductos" class="btn btn-secondary mt-2 mx-2" button ">Cancelar</a>
+                            <a href="{% url 'listarproductos' %}" class="btn btn-secondary mt-2 mx-2" button ">Cancelar</a>
                             <button type="submit " class="btn btn-danger mt-2 mx-2 " button ">Modificar</a>
                         </div>
                     </form>
