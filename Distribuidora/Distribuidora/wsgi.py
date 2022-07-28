@@ -17,4 +17,4 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Distribuidora.settings')
 
 application = get_wsgi_application()
 
-application = WhiteNoise(application)
+application = WhiteNoise(application, root="/Distribuidora/static/")
